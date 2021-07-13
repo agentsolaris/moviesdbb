@@ -1,0 +1,40 @@
+
+<h1>Reviews for movie </h1>
+
+<p *ngIf="!(reviews$ | async)"><em>Loading...</em></p>
+<p>
+  <a [routerLink]="['/reviews/add']" class="btn btn-primary float-right mb-3">Add new review</a>
+</p>
+
+<!-- <div *ngIf="(reviews$ | async)?.length>0">
+<div  *ngFor="let review of (reviews$ | async)" style="display: inline-block">
+  <h1>{{ review.title }}</h1>
+  
+</div>
+</div> -->
+
+<table class="table table-sm table-hover" *ngIf="(reviews$ | async)?.length>0">
+  <thead>
+    <tr>
+      <th>Text</th>
+      <th>Stars</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let review of (reviews$ | async)">
+        
+      <td >
+        {{ review.text }}<br>
+      </td>
+      
+      <td>{{ review.stars }}</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- <div *ngFor="let review of (reviews$ | async)" style="display: inline-block">
+  <h1>review.title</h1>
+  <img src="https://www.washingtonpost.com/graphics/2019/entertainment/oscar-nominees-review-poster-design/img/black-panther-web.jpg" alt="">
+</div> -->

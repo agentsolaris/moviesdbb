@@ -1,0 +1,16 @@
+<ng-container *ngIf="(review$ | async) as review; else loading">
+
+    <div>
+    
+      <h1>{{ review.text }}</h1>
+      <div>{{ review.stars }}</div> 
+     
+      <h5>New Review</h5>
+  
+    <div>
+      <textarea #review></textarea>
+      <button class="btn btn-info" type="submit" (click)="addreview(review)">Add</button>
+    </div>
+    </div>
+    </ng-container>
+    <ng-template #loading>Loading…</ng-template>

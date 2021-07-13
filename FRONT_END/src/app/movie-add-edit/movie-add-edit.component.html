@@ -1,0 +1,81 @@
+<h1>{{actionType}} movie</h1>
+<form [formGroup]="form" (ngSubmit)="save()" #formDir="ngForm" novalidate>
+  <div class="form-group row">
+    <label class=" control-label col-md-12">Title</label>
+    <div class="col-md-12">
+      <input class="form-control" type="text" formControlName="title">
+    </div>
+    </div>
+    <div class="form-group row">
+    <label class=" control-label col-md-12">Release Date</label>
+    <div class="col-md-12">
+      <input class="form-control" type="text" formControlName="releaseDate">
+    </div>
+</div>
+
+<div class="form-group row">
+    <label class=" control-label col-md-12">Running Time</label>
+    <div class="col-md-12">
+      <input class="form-control" type="text" formControlName="runningTimeMins">
+    </div></div>
+    <div class="form-group row">
+    <label class=" control-label col-md-12">Genre</label>
+    <div class="col-md-12">
+      <input class="form-control" type="text" formControlName="genre">
+    </div></div>
+    <div class="form-group row">
+    <label class=" control-label col-md-12">Poster</label>
+    <div class="col-md-12">
+      <input class="form-control" type="text" formControlName="poster">
+    </div></div>
+
+    <div class="form-group row">
+      <label class=" control-label col-md-12">Soundtrack name</label>
+      <div class="col-md-12">
+        <input class="form-control" type="text" formControlName="soundtrackName">
+      </div></div>
+
+      <div class="form-group row">
+        <label class=" control-label col-md-12">Soundtrack creator</label>
+        <div class="col-md-12">
+          <input class="form-control" type="text" formControlName="soundtrackCreator">
+        </div></div>
+  
+ 
+  <div class="form-group">
+    <button type="submit" class="btn btn-success float-right">Save</button>
+    <button class="btn btn-secondary float-left" (click)="cancel()">Cancel</button>
+  </div>
+</form>
+
+<br><br>
+
+
+<form [formGroup]="formActor" (ngSubmit)="onSubmit()">
+    <div formArrayName="actors">
+      <div
+              *ngFor="let actor of formActor.get('actors')['controls'];  let i=index"
+              class="panel panel-default"
+              [formGroupName]="i">
+        <div class="panel-heading">
+          <span>Actor {{i + 1}}</span>
+        </div>
+        <div class="panel-body">
+          <div class="form-group">
+            <!--<label>name {{actor |json}}</label>-->
+            <input type="text" class="form-control" formControlName="name">
+          </div>
+        </div>
+        <button class="btn btn-danger" type="button" (click)="removeActor(i)">
+          x
+        </button>
+        <button class="btn btn-primary" (click)="indexSelected=i" type="submit" style="cursor: default">Save</button>
+      </div>
+    </div>
+  
+    <div class="margin-20">
+      <button class="btn btn-primary" type="button" (click)="addActor()" style="cursor: default">
+        Add another actor +
+      </button>
+    </div>
+  </form>

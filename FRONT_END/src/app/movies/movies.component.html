@@ -1,0 +1,74 @@
+<h1>Movies</h1>
+
+<div *ngIf="!(interceptor)">
+<p *ngIf="!(movies$ | async)"><em><div>
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="reloadMovies()"
+    [disabled]="loaderService.showLoader"
+  >
+    Load Movies
+  </button>
+  <div>
+    <!-- <pre>{{ response | json }}</pre> -->
+    <div *ngIf="loaderService.showLoader" class="loader"></div>
+  </div>
+</div></em>
+</p>
+</div>
+<p>
+  <a [routerLink]="['/add']" class="btn btn-primary float-right mb-3">Add new movie</a>
+</p>
+
+<p>Hello, <strong>{{homeDetails?.firstName}} {{homeDetails?.lastName}} </strong> from {{homeDetails?.location}}</p>
+<p ><strong>Facebook Id:</strong> {{homeDetails?.facebookId}}</p>
+<div *ngIf="homeDetails?.pictureUrl"><img src="{{homeDetails?.pictureUrl}}" /></div> 
+  <a class="nav-link" (click)="logout()" href="#">Logoff</a>
+
+<!-- <div *ngIf="(movies$ | async)?.length>0">
+<div  *ngFor="let movie of (movies$ | async)" style="display: inline-block">
+  <h1>{{ movie.title }}</h1>
+  
+</div>
+</div> -->
+
+
+
+<table class="table table-sm table-hover" *ngIf="(movies$ | async)?.length>0">
+  <thead>
+    <tr>
+      <th></th>
+      
+     
+      <th>Release Date</th>
+      <th>Running Time</th>
+      <th>Genre</th>
+      
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let movie of (movies$ | async)">
+     
+      <td style="text-align:center;">
+        <a [routerLink]="['/movies/', movie.id]">{{ movie.title }}</a><br>
+        <img src="https://image.tmdb.org/t/p/w185_and_h278_bestv2/{{ movie.poster }}" alt="Cannot load image">
+              </td>
+      
+      <td>{{ movie.releaseDate }}</td>
+      <td>{{ movie.runningTimeMins}} mins</td>
+      <td>{{ movie.genre}}</td>
+      
+      <!-- <td>{{ movie.poster}}</td> -->
+      <td><a [routerLink]="['/movies/edit/', movie.id]" class="btn btn-primary btn-sm float-right">Edit</a></td>
+      <td><a [routerLink]="" (click)="delete(movie.id)" class="btn btn-danger btn-sm float-right">Delete</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- <div *ngFor="let movie of (movies$ | async)" style="display: inline-block">
+  <h1>movie.title</h1>
+  <img src="https://www.washingtonpost.com/graphics/2019/entertainment/oscar-nominees-movie-poster-design/img/black-panther-web.jpg" alt="">
+</div> -->

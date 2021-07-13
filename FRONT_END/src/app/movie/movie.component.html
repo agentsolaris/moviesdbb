@@ -1,0 +1,68 @@
+<ng-container *ngIf="(movie$ | async) as movie; else loading">
+
+  <div>
+  <img src="https://image.tmdb.org/t/p/w185_and_h278_bestv2/{{ movie.poster }}" alt="Cannot load image">
+    <h1>{{ movie.title }}</h1>
+    <div>{{ movie.releaseDate }}</div> 
+    <ul>
+      <li>Running time: {{ movie.runningTimeMins }} mins</li>
+      <li>Genre:  {{ movie.genre }}</li>
+      <li>Reviews:
+      <div >
+        <table class="table table-sm table-hover" >
+  <thead>
+    <tr>
+      <th>Text</th>
+      <th>Stars</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let review of movie.reviews ">
+        
+      <td >
+        {{ review.text }}<br>
+      </td>
+      
+      <td>{{ review.stars }}/5</td>
+    </tr>
+  </tbody>
+</table>
+ <a [routerLink]="['../../review/add', movie.id]" class="btn btn-primary btn-sm float-right">Add Review</a> 
+      </div>
+      </li>
+      <li>
+      <div>
+        Actors:
+        <table class="table table-sm table-hover" >
+          <thead>
+            <tr>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let moviesactors of movie.moviesActors ">
+                
+              <td >
+                {{ moviesactors.actor.name }}<br>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      </li>
+      <li *ngFor="let movie of (movies$ | async)"></li>
+      <div>
+      <li *ngIf="movie.soundtrack">Soundtrack: {{ movie.soundtrack.name }} created by {{ movie.soundtrack.creator }} </li>
+    </div>
+      
+    </ul>
+
+   
+  <div>
+    
+
+  </div>
+  </div>
+  </ng-container>
+  <ng-template #loading>Loading…</ng-template>
